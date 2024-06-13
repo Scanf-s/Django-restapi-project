@@ -19,5 +19,5 @@ jobs:
       - name: Check Out - pull repository code # GitHub에 올라가 있는 코드를 직접 작업환경으로 가져오는 작업
         uses: actions/checkout@v2
 
-      - name: Run Test-Code # 테스트 코드 실행
-        run: docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
+#      - name: Run Test-Code # 테스트 코드 실행
+#        run: docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"

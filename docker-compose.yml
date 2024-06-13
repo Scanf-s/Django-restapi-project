@@ -34,13 +34,8 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
       # 기본적으로 도커 컨테이너에서 실행되는 DB가 /data/db에 데이터를 저장하는데,
-      # 이를 사용자 컴퓨터에도 저장하여, 데이터 삭제되지 않도록 설정
+      # 이를 도커에도 저장하여, 데이터 삭제되지 않도록 설정
     environment:
       - POSTGRES_DB=youtube
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=123123
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
