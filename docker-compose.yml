@@ -1,6 +1,6 @@
 version: "3.11"
 services:
-  app:
+  app: # Django application
     build:
       context: .
       args:
@@ -9,4 +9,31 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
-    command: sh -c "python manage.py runserver 0.0.0.0:8000" # docker-compose up시 실행되는 명령어
+
+    # Command 설명
+    # sh -c 를 사용하여, 명령어를 실행
+    # python manage.py wait_for_db : Django가 DB와 연결이 완료될 때 까지 대기하게됨
+    # python manage.py migrate : DB와 연결되면 migrate 수행
+    # python manage.py runserver 0.0.0.0:8000 : Django 서버 실행
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py test core"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=youtube
+      - DB_USER=test
+      - DB_PASS=123123
+    depends_on: # DB가 먼저 준비가 되어야 함
+      - db
+
+  db: # PostgreSQL Database
+    image: postgres:16.3-alpine3.20
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      # 기본적으로 도커 컨테이너에서 실행되는 DB가 /data/db에 데이터를 저장하는데,
+      # 이를 사용자 컴퓨터에도 저장하여, 데이터 삭제되지 않도록 설정
+    environment:
+      - POSTGRES_DB=youtube
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=123123

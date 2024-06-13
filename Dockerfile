@@ -21,13 +21,23 @@ EXPOSE 8000
 
 ARG DEV=false
 
+# apk : Alpine의 패키지 매니저인 apk를 사용해 빌드 과정에서만 필요하고,
+# 나중에는 이미지에서 제거될 수 있는 패키지들을 설치하는 명령
+
+# --virtual .tmp-build-deps 옵션:
+# 해당 패키지들을 '가상' 패키지 그룹 .tmp-build-deps에 넣는 것을 의미
+# 나중에 이 가상 패키지 그룹을 한 번에 제거할 수 있어서 이미지 크기를 줄이는 데 도움이 된다.
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client jpeg-dev && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
