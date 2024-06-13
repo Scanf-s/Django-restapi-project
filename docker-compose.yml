@@ -15,10 +15,12 @@ services:
     # python manage.py wait_for_db : Django가 DB와 연결이 완료될 때 까지 대기하게됨
     # python manage.py migrate : DB와 연결되면 migrate 수행
     # python manage.py runserver 0.0.0.0:8000 : Django 서버 실행
+    # command에 테스트 코드를 추가하고 싶다면?
+    # python manage.py test appname 넣어주면 된다.
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py test core"
+             python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
       - DB_NAME=youtube
