@@ -43,11 +43,16 @@ CUSTOM_USER_APPS = [
     'videos.apps.VideosConfig',
     'reactions.apps.ReactionsConfig',
     'comments.apps.CommentsConfig',
-    'common.apps.CommonConfig',
     'subscriptions.apps.SubscriptionsConfig',
+    'rest_framework', # DRF
+    'drf_spectacular', # DRF-Spectacular
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

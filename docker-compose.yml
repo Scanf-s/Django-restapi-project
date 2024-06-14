@@ -26,6 +26,7 @@ services:
       - DB_NAME=youtube
       - DB_USER=test
       - DB_PASS=123123
+      - PYTHONPATH=/app
     depends_on: # DB가 먼저 준비가 되어야 함
       - db
 
