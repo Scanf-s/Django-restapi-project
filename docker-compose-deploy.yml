@@ -1,6 +1,6 @@
 version: "3.11"
 services:
-  app: # Django application
+  app:
     build:
       context: .
       args:
@@ -20,10 +20,10 @@ services:
       - DB_PASS=${DB_PASS}
       - SECRET_KEY=${DJANGO_SECRET_KEY}
       - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
-    depends_on: # DB가 먼저 준비가 되어야 함
+    depends_on:
       - db
 
-  db: # PostgreSQL Database
+  db:
     image: postgres:16.3-alpine3.20
     restart: always
     volumes:
@@ -40,8 +40,7 @@ services:
     depends_on:
       - app
     ports:
-      - "80:8000" # AWS 사용 시 80 포트를 열어서 8000번 django로 들어가게 한다.
-      - "8000:8000" # 로컬 테스트 시
+      - "80:8000"
     volumes:
       - static-data:/vol/static
 
