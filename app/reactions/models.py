@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count, Q
+
 from common.models import Common
 
 # Create your models here.
@@ -21,5 +23,13 @@ class Reaction(Common):
     # Video 1개는 여러개의 Reaction을 가질 수 있음. (1:N관계) -> Reaction에 FK 작성
     video = models.ForeignKey('videos.Video', on_delete=models.CASCADE, related_name='reactions')
 
+    @staticmethod
+    def get_video_reactions(video):
+        reactions = Reaction.objects.filter(video=video).aggregate(
+            likes_count=Count('reaction', filter=Q(reaction=Reaction.LIKE)),
+            dislikes_count=Count('reaction', filter=Q(reaction=Reaction.DISLIKE))
+        )
+        return reactions
+    
     class Meta:
         db_table = 'reactions'
