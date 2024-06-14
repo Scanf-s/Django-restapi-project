@@ -30,7 +30,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_${DB_USER}
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
 
   proxy:
@@ -39,9 +39,9 @@ services:
     restart: always
     depends_on:
       - app
-    # ports:
-      # - 80:8000 # ec2-어쩌구저쩌구.com/api/v1 (from:to) AWS 사용 시 80 port를 열어주게 되므로
-      # - 8000:8000 # 로컬 테스트 시
+    ports:
+      - "80:8000" # AWS 사용 시 80 포트를 열어서 8000번 django로 들어가게 한다.
+      - "8000:8000" # 로컬 테스트 시
     volumes:
       - static-data:/vol/static
 
