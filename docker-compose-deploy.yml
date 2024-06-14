@@ -8,11 +8,12 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./app:/app
       - static-data:/vol/web
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+             python manage.py runserver 0.0.0.0:9000"  # Change port to 9000
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -20,6 +21,7 @@ services:
       - DB_PASS=${DB_PASS}
       - SECRET_KEY=${DJANGO_SECRET_KEY}
       - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - PYTHONPATH=/app
     depends_on:
       - db
 
@@ -40,10 +42,15 @@ services:
     depends_on:
       - app
     ports:
-      - "80:8000"
+      - "80:8000"  # Public port mapping
     volumes:
       - static-data:/vol/static
+    environment:
+      - LISTEN_PORT=80  # Nginx will listen on port 80
+      - APP_HOST=app
+      - APP_PORT=9000  # Django app will run on port 9000 internally
 
 volumes:
   postgres-data:
   static-data:
+
