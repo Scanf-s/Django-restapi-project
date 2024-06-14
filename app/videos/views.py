@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Video
 
-from .serializers import VideoListSerializer
+from .serializers import VideoListSerializer, VideoDetailSerializer
 
 class VideoList(APIView):
     """
@@ -47,7 +47,7 @@ class VideoDetail(APIView):
         data = get_object_or_404(Video, id=pk)
 
         # objects -> Json 형식 직렬화
-        serializer = VideoListSerializer(data)
+        serializer = VideoDetailSerializer(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
@@ -55,7 +55,7 @@ class VideoDetail(APIView):
 
         request_data = request.data
 
-        serializer = VideoListSerializer(instance=data, data=request_data) # 가져온 instance data를 request_data로 update
+        serializer = VideoDetailSerializer(instance=data, data=request_data) # 가져온 instance data를 request_data로 update
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

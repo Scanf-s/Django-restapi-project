@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-37*!+8)#jbn4smk#gm9yfahdllu1(v%&#sxvzi711h*se94n^_'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0))) # 0: False 1: True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # 나중에 EC2 사용하면, ec2 넣어주면 된다.
 
 # Application definition
 DJANGO_SYSTEM_APPS = [
@@ -134,7 +134,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/static/'
+MEDIA_URL = '/static/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -143,3 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model 등록
 AUTH_USER_MODEL = 'users.User'
+
+# ROOT directory
+MEDIA_ROOT = '/vol/web/media'
+STATIC_ROOT = '/vol/web/static'
