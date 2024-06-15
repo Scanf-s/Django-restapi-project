@@ -3,6 +3,16 @@
 - Basic Django Modeling, API design, and implementation using Django
 - This project demonstrates basic CI/CD practices.
 
+
+# Technology Stack
+- Python: The programming language used for developing the application.
+- Django: The web framework used for building the backend of the application.
+- Django Rest Framework (DRF): An extension of Django for building RESTful APIs.
+- PostgreSQL: The database system used for storing application data.
+- Docker: A platform for developing, shipping, and running applications in containers.
+- Nginx: A web server used as a reverse proxy to serve the Django application.
+- Amazon EC2: The cloud computing service used to deploy and run the application.
+
 ## Project Structure
 ```bash
 ├── Dockerfile
