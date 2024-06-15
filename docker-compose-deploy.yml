@@ -43,6 +43,8 @@ services:
       - static-data:/vol/static
     environment:
       - LISTEN_PORT=80  # Nginx will listen on port 80
+      - APP_HOST=app
+      - APP_PORT=9000  # Django app will run on port 9000 internally
 
 volumes:
   postgres-data:

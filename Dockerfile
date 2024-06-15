@@ -16,6 +16,9 @@ COPY ./scripts /scripts
 # 작업 디렉토리를 /app으로 설정
 WORKDIR /app
 
+# curl 설치를 위한 추가
+RUN apk add --no-cache curl
+
 # 컨테이너가 8000번 포트를 노출하도록 설정
 EXPOSE 8000
 
@@ -50,3 +53,4 @@ USER django-user
 
 # 컨테이너가 실행될 때 run.sh 스크립트를 실행하도록 설정
 CMD ["run.sh"]
+
