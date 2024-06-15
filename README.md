@@ -1,6 +1,3 @@
-작성하신 README는 전반적으로 잘 구성되어 있지만, 몇 가지 추가적인 설명과 수정으로 더 명확하고 사용자 친화적으로 만들 수 있습니다. 다음은 조금 더 다듬은 버전입니다.
-
-```markdown
 # Django Practice Project
 
 - Basic Django Modeling, API design, and implementation using Django
