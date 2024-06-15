@@ -3,6 +3,40 @@
 - Basic Django Modeling, API design, and implementation using Django
 - This project demonstrates basic CI/CD practices.
 
+## Project Structure
+```bash
+├── Dockerfile
+├── README.md
+├── app // django app
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── comments
+│   ├── common
+│   ├── config // settings.py located
+│   ├── core
+│   ├── db.sqlite3
+│   ├── manage.py
+│   ├── reactions
+│   ├── storage
+│   ├── subscriptions
+│   ├── users
+│   └── videos
+├── data
+│   └── db
+├── docker-compose-deploy.yml // Used only for deployment on EC2
+├── docker-compose.yml
+├── proxy // Nginx configuration
+│   ├── Dockerfile
+│   ├── default.conf.tpl
+│   ├── run.sh
+│   └── uwsgi_params
+├── requirements.dev.txt
+├── requirements.txt
+└── scripts
+    └── run.sh
+
+```
+
 ## How to Install
 
 ### 1. Clone the Project
