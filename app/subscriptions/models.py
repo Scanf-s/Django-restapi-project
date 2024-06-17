@@ -8,4 +8,3 @@ class Subscription(Common):
 
     # 내가 구독한 채널
     subscribed_channel = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='subscribers')
-

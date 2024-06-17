@@ -8,11 +8,10 @@ from .serializers import VideoListSerializer, VideoDetailSerializer
 
 class VideoList(APIView):
     """
-    # Create your views here.
-    # Video list 보여주는 API
-    # api/v1/videos
-    # GET : 전체 video 조회
-    # POST : 새로운 video 생성
+    Video list 보여주는 API
+    api/v1/videos
+    GET : 전체 video 조회
+    POST : 새로운 video 생성
     """
     def get(self, request):
         data = Video.objects.all() # => QuerySet[Video, ...]
@@ -34,12 +33,12 @@ class VideoList(APIView):
 
 class VideoDetail(APIView):
     """
-    # Video 상세 정보 조회하는 API
-    # api/v1/videos/{video_id}
-    # GET : 특정 ID의 Video 조회
-    # POST : X
-    # PUT : 특정 ID의 Video 업데이트
-    # DELETE : 특정 ID의 Video 삭제
+    Video 상세 정보 조회하는 API
+    api/v1/videos/{video_id}
+    GET : 특정 ID의 Video 조회
+    POST : X
+    PUT : 특정 ID의 Video 업데이트
+    DELETE : 특정 ID의 Video 삭제
     """
 
     def get(self, request, pk):

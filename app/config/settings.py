@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,12 +47,16 @@ CUSTOM_USER_APPS = [
     'subscriptions.apps.SubscriptionsConfig',
     'rest_framework', # DRF
     'drf_spectacular', # DRF-Spectacular
+    'rest_framework_simplejwt', # DRF-SimpleJWT
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # 여기에 쉼표 추가
+    ),
 }
 
 MIDDLEWARE = [
@@ -148,3 +153,30 @@ AUTH_USER_MODEL = 'users.User'
 # ROOT directory
 MEDIA_ROOT = '/vol/web/media'
 STATIC_ROOT = '/vol/web/static'
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+# SIMPLE JWT
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+    "SIGNING_KEY": "SECRET",
+    "ALGORITHM": "HS256",
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+APPEND_SLASH = True
