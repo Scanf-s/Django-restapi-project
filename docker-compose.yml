@@ -29,6 +29,7 @@ services:
       - PYTHONPATH=/app
     depends_on: # DB가 먼저 준비가 되어야 함
       - db
+      - redis
 
   db: # PostgreSQL Database
     image: postgres:16.3-alpine3.20
@@ -40,3 +41,8 @@ services:
       - POSTGRES_DB=youtube
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=123123
+
+  redis: # Redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"

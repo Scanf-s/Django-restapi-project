@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['*'] # 나중에 EC2 사용하면, ec2 넣어주면 된다.
 
 # Application definition
 DJANGO_SYSTEM_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +47,7 @@ CUSTOM_USER_APPS = [
     'reactions.apps.ReactionsConfig',
     'comments.apps.CommentsConfig',
     'subscriptions.apps.SubscriptionsConfig',
+    'chat.apps.ChatConfig',
     'rest_framework', # DRF
     'drf_spectacular', # DRF-Spectacular
     'rest_framework_simplejwt', # DRF-SimpleJWT
@@ -87,8 +90,19 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = 'config.asgi.application' # config/asgi.py에 application을 설정했으므로 이렇게 설정해준다.
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(os.environ.get('REDIS_HOST', 'redis'), int(os.environ.get('REDIS_PORT', 6379)))],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

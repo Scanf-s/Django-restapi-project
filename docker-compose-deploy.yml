@@ -20,6 +20,7 @@ services:
       - PYTHONPATH=/app
     depends_on:
       - db
+      - redis
 
   db:
     image: postgres:16.3-alpine3.20
@@ -30,6 +31,11 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
+
+  redis: # Redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
 
   proxy:
     build:
