@@ -15,27 +15,113 @@
 
 ## Project Structure
 ```bash
+.
 ├── Dockerfile
 ├── README.md
-├── app // django app
+├── app
 │   ├── __init__.py
 │   ├── __pycache__
+│   │   └── __init__.cpython-312.pyc
+│   ├── chat
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── consumers.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── routing.py
+│   │   ├── templates
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
 │   ├── comments
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   └── views.py
 │   ├── common
-│   ├── config // settings.py located
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── config
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── test.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
 │   ├── core
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── management
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
 │   ├── db.sqlite3
 │   ├── manage.py
 │   ├── reactions
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── static
 │   ├── storage
 │   ├── subscriptions
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
 │   ├── users
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   └── views.py
 │   └── videos
+│       ├── __init__.py
+│       ├── __pycache__
+│       ├── admin.py
+│       ├── apps.py
+│       ├── migrations
+│       ├── models.py
+│       ├── serializers.py
+│       ├── tests.py
+│       ├── urls.py
+│       └── views.py
 ├── data
-│   └── db
-├── docker-compose-deploy.yml // Used only for deployment on EC2
+│   └── db  [error opening dir]
+├── docker-compose-deploy.yml
 ├── docker-compose.yml
-├── proxy // Nginx configuration
+├── proxy
 │   ├── Dockerfile
 │   ├── default.conf.tpl
 │   ├── run.sh
@@ -44,7 +130,6 @@
 ├── requirements.txt
 └── scripts
     └── run.sh
-
 ```
 
 ## How to Install
@@ -100,6 +185,7 @@ Connect to your EC2 instance using your web browser:
 ```
 http://your-ec2-instance/admin
 http://your-ec2-instance/api/v1/schema/swagger-ui
+http://your-ec2-instance/chat
 ```
 
 Log in with the superuser account you created.
